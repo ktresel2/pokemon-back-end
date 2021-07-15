@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const squadSchema = require('./squad')
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -9,6 +11,16 @@ const userSchema = new mongoose.Schema({
   hashedPassword: {
     type: String,
     required: true
+  },
+  name: {
+    type: String,
+    required: true,
+    default: ['Trainer']
+  },
+  squad: {
+    type: Array,
+    children: [squadSchema],
+    default: []
   },
   token: String
 }, {
