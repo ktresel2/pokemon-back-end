@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
     default: ['Trainer']
   },
   squad: {
+    type: Array,
     children: [squadSchema],
-    quantity: Number,
     default: []
   },
   token: String

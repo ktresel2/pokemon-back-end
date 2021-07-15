@@ -4,6 +4,7 @@ const pokemonSchema = require('./pokemon')
 
 const squadSchema = new mongoose.Schema({
   pokemon: {
+    type: Array,
     children: [pokemonSchema],
     required: true
   }

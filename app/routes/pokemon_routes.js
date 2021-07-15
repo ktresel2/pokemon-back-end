@@ -23,4 +23,12 @@ router.get('/pokemon/:id', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/pokemon', (req, res, next) => {
+  Pokemon.create(req.body.poke)
+    .then(pokemon => {
+      res.status(201).json({ pokemon })
+    })
+    .catch(next)
+})
+
 module.exports = router
