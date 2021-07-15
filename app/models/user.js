@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    default: ['Trainer']
+    default: 'Trainer'
   },
   squad: {
     type: Array,
