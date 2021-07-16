@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 'Trainer'
   },
-  squad: {
+  squads: {
     type: Array,
     children: [squadSchema],
     default: []

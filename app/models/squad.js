@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-const pokemonSchema = require('./pokemon')
-
 const squadSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -9,10 +7,11 @@ const squadSchema = new mongoose.Schema({
     required: true
   },
   pokemon: {
-    type: Array,
-    children: [pokemonSchema],
-    required: true,
-    validate: this.children.length < 7
+    type: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Pokemon'
+    }],
+    maxItems: 6
   },
   current: {
     type: Boolean,
