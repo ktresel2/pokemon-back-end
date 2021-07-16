@@ -11,11 +11,12 @@ const squadSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Pokemon'
     }],
+    default: [],
     maxItems: 6
   },
   current: {
     type: Boolean,
-    default: false
+    default: true
   }
 }, {
   timestamps: true

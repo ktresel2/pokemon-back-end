@@ -37,14 +37,35 @@ router.post('/squads', requireToken, (req, res, next) => {
     .catch(next)
 })
 
-router.patch('/squads:id', requireToken, (req, res, next) => {
+// Add to squad
+router.patch('/squads/:id', requireToken, (req, res, next) => {
   delete req.body.squad.owner
 
   Squad.findById(req.params.id)
     .then(handle404)
+    .then(res => {
+      requireOwnership(req, res)
+        .then(squad => {
+          squad.pokemon.push(req.body.pokemon.id)
+          return squad.save()
+        })
+    })
+    .then(() => res.sendStatus(204))
+    .catch(next)
+})
+
+// Delete from squad
+router.patch('/squad/:id', requireToken, (req, res, next) => {
+  Squad.findById(req.params.id)
+    .then(handle404)
+    .then(res => requireOwnership(req, res))
     .then(squad => {
-      requireOwnership(req, squad)
-      return squad.updateOne(req.body.squad)
+      const index = squad.pokemon.indexOf(req.body.pokemon.id)
+      if (index > -1) {
+        squad.pokemon.splice(index, 1)
+      }
+
+      return squad.save()
     })
     .then(() => res.sendStatus(204))
     .catch(next)
