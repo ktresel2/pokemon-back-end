@@ -17,7 +17,6 @@ router.get('/pokemon', (req, res, next) => {
 })
 
 router.get('/pokemon/:id', (req, res, next) => {
-  console.log(req.params)
   Pokemon.findById(req.params.id)
     .then(handle404)
     .then(pokemon => res.status(200).json({ pokemon }))

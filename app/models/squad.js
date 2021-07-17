@@ -13,10 +13,6 @@ const squadSchema = new mongoose.Schema({
     }],
     default: [],
     maxItems: 6
-  },
-  current: {
-    type: Boolean,
-    default: true
   }
 }, {
   timestamps: true
