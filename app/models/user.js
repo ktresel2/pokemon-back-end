@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-const squadSchema = require('./squad')
-
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -16,11 +14,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: 'Trainer'
-  },
-  squads: {
-    type: Array,
-    children: [squadSchema],
-    default: []
   },
   token: String
 }, {
