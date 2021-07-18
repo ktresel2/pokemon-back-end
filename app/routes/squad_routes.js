@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 
 const Squad = require('../models/squad')
+const Pokemon = require('../models/pokemon')
 
 const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
@@ -43,19 +44,26 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
   console.log(req.body)
   console.log(req.params)
 
-  Squad.findById(req.params.id)
-    .then(handle404)
-    .then(squad => requireOwnership(req, squad))
-    .then(squad => {
-      !squad.pokemon.includes(req.body.pokemon.id) && squad.pokemon.push(req.body.pokemon.id)
-      squad.save()
-      return squad
+  let poke
+
+  Pokemon.findById(req.body.pokemon.id)
+    .then(pok => {
+      poke = pok
     })
-    .then(squad => {
-      console.log('squad', squad)
-      res.status(200).json({ squad: squad.toObject() })
-    })
-    .catch(next)
+    .then(Squad.findById(req.params.id)
+      .populate('pokemon')
+      .then(squad => {
+        requireOwnership(req, squad)
+        return squad
+      })
+      .then(squad => {
+        squad.pokemon.includes(poke) ? squad.pokemon.push(poke).then(squad => squad.save()) : squad.save()
+      })
+      .then(squad => {
+        res.status(200).json({ squad: squad.pokemon.toObject() })
+      })
+      .catch(next)
+    )
 })
 
 // Delete from squad
