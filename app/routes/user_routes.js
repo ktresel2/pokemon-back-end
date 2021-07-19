@@ -45,7 +45,8 @@ router.post('/sign-up', (req, res, next) => {
       // return necessary params to create a user
       return {
         email: req.body.credentials.email,
-        hashedPassword: hash
+        hashedPassword: hash,
+        name: req.body.credentials.name
       }
     })
     // create user with provided email and hashed password
@@ -91,6 +92,7 @@ router.post('/sign-in', (req, res, next) => {
       }
     })
     .then(user => {
+      console.log(user)
       // return status 201, the email, and the new token
       res.status(201).json({ user: user.toObject() })
     })
