@@ -44,9 +44,6 @@ router.post('/squads', requireToken, (req, res, next) => {
 
 // Add to squad
 router.patch('/squads/:id', requireToken, (req, res, next) => {
-  console.log(req.body)
-  console.log(req.params)
-
   let poke
 
   Pokemon.findById(req.body.pokemon.id)
@@ -57,11 +54,14 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
       .populate('pokemon')
       .then(squad => requireOwnership(req, squad))
       .then(squad => {
+        const hasPokemon = squad.pokemon.some(poke => poke._id.equals(req.body.pokemon.id))
+        if (hasPokemon) {
+          throw new Error('Already exists')
+        }
         squad.pokemon.push(poke)
         return squad.save()
       })
       .then(squad => {
-        console.log(squad)
         res.status(200).json({ squad: squad.toObject() })
       })
       .catch(next)
@@ -72,12 +72,10 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
 router.patch('/delete-from-squad/:id', requireToken, (req, res, next) => {
   Squad.findById(req.params.id)
     .then(res => {
-      console.log(res)
       return res
     })
     .then(res => requireOwnership(req, res))
     .then(squad => {
-      console.log('on 81', squad)
       const index = squad.pokemon.indexOf(req.body.pokemon.id)
       index > -1 && squad.pokemon.splice(index, 1)
       squad.save()
