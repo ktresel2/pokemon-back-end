@@ -18,14 +18,17 @@ router.get('/squads', requireToken, (req, res, next) => {
     .then(squads => {
       return squads.map(squad => squad.toObject())
     })
-    .then(squads => res.status(200).json({ squads: squads }))
+    .then(squads => res.status(200).json({ squads }))
     .catch(next)
 })
 
 router.get('/squads/:id', requireToken, (req, res, next) => {
   Squad.findById(req.params.id)
     .populate('pokemon')
-    .then(squad => res.status(200).json({ squad }))
+    .then(squad => {
+      return squad
+    })
+    .then(squad => res.status(200).json({ squad: squad.toObject() }))
     .catch(next)
 })
 
@@ -52,15 +55,14 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
     })
     .then(Squad.findById(req.params.id)
       .populate('pokemon')
+      .then(squad => requireOwnership(req, squad))
       .then(squad => {
-        requireOwnership(req, squad)
-        return squad
+        squad.pokemon.push(poke)
+        return squad.save()
       })
       .then(squad => {
-        squad.pokemon.includes(poke) ? squad.pokemon.push(poke).then(squad => squad.save()) : squad.save()
-      })
-      .then(squad => {
-        res.status(200).json({ squad: squad.pokemon.toObject() })
+        console.log(squad)
+        res.status(200).json({ squad: squad.toObject() })
       })
       .catch(next)
     )
@@ -69,15 +71,20 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
 // Delete from squad
 router.patch('/delete-from-squad/:id', requireToken, (req, res, next) => {
   Squad.findById(req.params.id)
-    .then(handle404)
+    .then(res => {
+      console.log(res)
+      return res
+    })
     .then(res => requireOwnership(req, res))
     .then(squad => {
+      console.log('on 81', squad)
       const index = squad.pokemon.indexOf(req.body.pokemon.id)
       index > -1 && squad.pokemon.splice(index, 1)
       squad.save()
-      return squad
     })
-    .then(squad => res.status(200).json({ squad: squad.toObject() }))
+    .then(squad => {
+      res.sendStatus(200)
+    })
     .catch(next)
 })
 
