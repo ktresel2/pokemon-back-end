@@ -15,12 +15,12 @@ const populate = (num) => {
       pokemon.height = res.data.height
       return pokemon
     })
-    .then(poke => axios({ method: 'POST', url: 'http://localhost:4741/pokemon', data: { poke } }))
+    .then(poke => axios({ method: 'POST', url: 'https://intense-sierra-55545.herokuapp.com/pokemon', data: { poke } }))
     .catch(console.error)
 }
 
 const getEmAll = () => {
-  for (let i = 1; i < 152; i++) {
+  for (let i = 1; i < 2; i++) {
     populate(i)
   }
 }

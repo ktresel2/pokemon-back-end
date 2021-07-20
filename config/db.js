@@ -1,7 +1,7 @@
 'use strict'
 
 // creating a base name for the mongodb
-const mongooseBaseName = 'pokemon-card-database'
+const mongooseBaseName = 'pokemon-card-database4'
 
 // create the mongodb uri for development and test
 const database = {
