@@ -1,9 +1,13 @@
-
-
-
 # Pokemon Card Database - Back End API
 
 ## About the app
+
+### Setup and Installation
+
+1. Fork and clone this repository.
+2. Install dependencies with `npm install`.
+3. Checkout to a new branch to start working.
+4. Create a pull request to submit your work.
 
 ### Description
 
