@@ -71,9 +71,6 @@ router.patch('/squads/:id', requireToken, (req, res, next) => {
 // Delete from squad
 router.patch('/delete-from-squad/:id', requireToken, (req, res, next) => {
   Squad.findById(req.params.id)
-    .then(res => {
-      return res
-    })
     .then(res => requireOwnership(req, res))
     .then(squad => {
       const index = squad.pokemon.indexOf(req.body.pokemon.id)
