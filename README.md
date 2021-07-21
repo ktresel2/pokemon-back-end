@@ -22,7 +22,7 @@ This is a back-end API serving visitors with an index of all 151 G1 Pokemon. It 
 
 ### ERD
 
-![ERD](https://imgur.com/FAfIsaa)
+![ERD](https://i.imgur.com/JXGuEXY.jpg)
 
 ## Deployed sites:
 
