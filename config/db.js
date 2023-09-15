@@ -1,20 +1,16 @@
-'use strict'
+const mongoose = require("mongoose");
+// const config = require('config')
+// const db = process.env.MY_MONGO_URI
 
-// creating a base name for the mongodb
-const mongooseBaseName = 'pokemon-card-database4'
+require("dotenv").config();
 
-// create the mongodb uri for development and test
-const database = {
-  development: `mongodb://localhost/${mongooseBaseName}-development`,
-  test: `mongodb://localhost/${mongooseBaseName}-test`
-}
-
-// Identify if development environment is test or development
-// select DB based on whether a test file was executed before `server.js`
-const localDb = process.env.TESTENV ? database.test : database.development
-
-// Environment variable DB_URI will be available in
-// heroku production evironment otherwise use test or development db
-const currentDb = process.env.DB_URI || localDb
-
-module.exports = currentDb
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.mongoURI, { useNewUrlParser: true });
+    console.log("MongoDB connected");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+module.exports = connectDB;
