@@ -20,18 +20,18 @@ const pokemonSchema = new mongoose.Schema({
     required: true,
     default: 'https://images.unsplash.com/photo-1542779283-429940ce8336?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cG9rZW1vbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'
   },
-  height: {
-    type: Number,
-    required: true
-  },
-  weight: {
-    type: Number,
-    required: true
-  },
-  moves: {
-    type: Array,
-    required: true
-  }
+  // height: {
+  //   type: Number,
+  //   required: true
+  // },
+  // weight: {
+  //   type: Number,
+  //   required: true
+  // },
+  // moves: {
+  //   type: Array,
+  //   required: true
+  // }
 }, {
   timestamps: true
 })
