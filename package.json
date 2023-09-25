@@ -20,10 +20,11 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.6.0",
     "mongoose": "^7.2.2",
     "passport": "^0.6.0",
+    "passport-bearer-strategy": "^1.0.1",
     "passport-http-bearer": "^1.0.1",
     "react-scripts": "^5.0.1"
   },

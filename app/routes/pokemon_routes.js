@@ -18,7 +18,7 @@ router.get("/pokemon", (req, res, next) => {
 
 router.get("/pokemon/:id", (req, res, next) => {
   Pokemon.findById(req.params.id)
-    .then(handle404)
+    // .then(handle404())
     .then((pokemon) => res.status(200).json({ pokemon }))
     .catch(next);
 });

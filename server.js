@@ -34,13 +34,17 @@ const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}` }))
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // define port for API to run on
 const port = process.env.PORT || serverDevPort
 
 // register passport authentication middleware
-app.use(auth)
+// app.use(auth)
 
 // add `express.json` middleware which will parse JSON requests into
 // JS objects before they reach the route files.
