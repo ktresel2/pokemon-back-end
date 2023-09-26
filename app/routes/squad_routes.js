@@ -13,8 +13,7 @@ const auth = require('../../lib/auth')
 const router = express.Router()
 
 router.get("/squads", auth, async (req, res, next) => {
-  console.log(req.user.id)
-  Squad.find({ owner: req.user.id })
+  Squad.find({ owner: req.user.id})
     .populate("pokemon")
     .then((squads) => {
       return squads.map((squad) => squad.toObject());

@@ -172,8 +172,8 @@ router.post("/sign-out", auth, (req, res, next) => {
   // create a new random token for the user, invalidating the current one
   
   // save the token and respond with 204
-    res.sendStatus(204)
-    .catch(next());
+    res.status(204)
+    // .catch(next());
 });
 
 module.exports = router;
