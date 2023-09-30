@@ -54,7 +54,6 @@ router.patch("/squads/:id", auth, (req, res, next) => {
         .populate("pokemon")
         .then((squad) => requireOwnership(req, squad))
         .then((squad) => {
-          console.log(squad)
           const hasPokemon = squad.pokemon.some((poke) =>
             poke._id.equals(req.body.pokemon.id)
           );

@@ -24,7 +24,6 @@ router.get("/pokemon/:id", (req, res, next) => {
 });
 
 router.post("/pokemon", (req, res, next) => {
-  // console.log(req.body);
   Pokemon.create(req.body.poke)
     .then(pokemon => {
       res.status(201).json({ pokemon })

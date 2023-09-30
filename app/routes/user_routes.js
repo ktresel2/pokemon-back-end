@@ -62,6 +62,7 @@ router.post(
           id: user.id,
         },
       };
+
       jwt.sign(
         payload,
         process.env.jwtSecret,
