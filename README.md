@@ -32,7 +32,7 @@ This is a back-end API serving visitors with an index of all 151 G1 Pokemon. It 
 
 ### Back End
 
-<a href="https://pokemon-front-ndjy.onrender.com/#/pokemon" target="_blank">Front End Client</a>
+<a href="https://pokemon-squad.onrender.com/" target="_blank">Back-End API</a>
 
 
 ### Front End
