@@ -32,11 +32,11 @@ This is a back-end API serving visitors with an index of all 151 G1 Pokemon. It 
 
 ### Back End
 
-[Back End API](https://intense-sierra-55545.herokuapp.com/)
+[Back End API](https://pokemon-squad.onrender.com/)
 
 ### Front End
 
-[Front End Client](https://ktresel2.github.io/pokemon-front-end/)
+[Front End Client](https://pokemon-front-ndjy.onrender.com/#/pokemon)
 
 
 ## API Routes
